@@ -239,7 +239,7 @@ class GroupManagerTest extends TestCase {
 		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
 			->withConsecutive(
-				[new BeforeGroupCreatedEvent('groupB')],
+				[new BeforeGroupCreatedEvent('SAML_groupB')],
 				[new GroupCreatedEvent($groupB)]
 			);
 		// assert user gets added to group
@@ -293,7 +293,7 @@ class GroupManagerTest extends TestCase {
 		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
 			->withConsecutive(
-				[new BeforeGroupCreatedEvent('groupC')],
+				[new BeforeGroupCreatedEvent('SAML_groupC')],
 				[new GroupCreatedEvent($groupC)]
 			);
 		// assert user gets added to group
