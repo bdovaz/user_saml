@@ -178,8 +178,8 @@ class GroupManagerTest extends TestCase {
 		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
 			->withConsecutive(
-				new BeforeGroupDeletedEvent($groupA),
-				new GroupDeletedEvent($groupA)
+				[new BeforeGroupDeletedEvent($groupA)],
+				[new GroupDeletedEvent($groupA)]
 			);
 
 		$this->invokePrivate($this->ownGroupManager, 'handleUserUnassignedFromGroups', [$user, ['groupA']]);
@@ -239,8 +239,8 @@ class GroupManagerTest extends TestCase {
 		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
 			->withConsecutive(
-				new BeforeGroupCreatedEvent('groupB'),
-				new GroupCreatedEvent($groupB)
+				[new BeforeGroupCreatedEvent('groupB')],
+				[new GroupCreatedEvent($groupB)]
 			);
 		// assert user gets added to group
 		$groupB->expects($this->once())
@@ -293,8 +293,8 @@ class GroupManagerTest extends TestCase {
 		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
 			->withConsecutive(
-				new BeforeGroupCreatedEvent('groupC'),
-				new GroupCreatedEvent($groupC)
+				[new BeforeGroupCreatedEvent('groupC')],
+				[new GroupCreatedEvent($groupC)]
 			);
 		// assert user gets added to group
 		$groupC->expects($this->once())
