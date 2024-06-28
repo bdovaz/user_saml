@@ -284,18 +284,18 @@ class GroupManagerTest extends TestCase {
 		// assert the default group prefix is configured
 		$this->settings
 			->method('get');
-		$this->eventDispatcher->expects($this->once())
-			->method('dispatchTyped')
-			->with(new BeforeGroupCreatedEvent('groupC'));
 		// assert group is created with prefix + gid
 		$this->ownGroupBackend
 			->expects($this->once())
 			->method('createGroup')
 			->with('SAML_groupC', 'groupC')
 			->willReturn(true);
-		$this->eventDispatcher->expects($this->once())
+		$this->eventDispatcher->expects($this->exactly(2))
 			->method('dispatchTyped')
-			->with(new GroupCreatedEvent($groupC));
+			->withConsecutive(
+				new BeforeGroupCreatedEvent('groupC'),
+				new GroupCreatedEvent($groupC)
+			);
 		// assert user gets added to group
 		$groupC->expects($this->once())
 			->method('addUser')
